@@ -10,5 +10,3 @@
 docker run --rm --detach --publish 4444:4444 --name selenium-hub selenium/hub:3.4.0
 docker run --rm --detach --publish-all -p 5900:5900 --link selenium-hub:hub --name chrome-node selenium/node-chrome-debug:3.4.0
 docker run --rm --detach --publish-all -p 5901:5900 --link selenium-hub:hub --name firefox-node selenium/node-firefox-debug:3.4.0
-
-bundle exec cucumber
