@@ -1,0 +1,14 @@
+# had to run this on linux to allow docker to run: sudo usermod -a -G docker $USER
+# You can provide params as follows:
+# --env JAVA_OPTS=-Xmx512m, --env SE_OPTS="-debug true"
+# --env HUB_PORT_4444_TCP_ADDR=10.10.1.10 --env HUB_PORT_4444_TCP_PORT=4444
+# --env PHANTOMJS_OPTS="--ignore-ssl-errors=true"
+# You can mount upload if you are testing upload on ui (mount to node, not hub)
+
+# vnc password is: secret
+
+docker run --rm --detach --publish 4444:4444 --name selenium-hub selenium/hub:3.4.0
+docker run --rm --detach --publish-all -p 5900:5900 --link selenium-hub:hub --name chrome-node selenium/node-chrome-debug:3.4.0
+docker run --rm --detach --publish-all -p 5901:5900 --link selenium-hub:hub --name firefox-node selenium/node-firefox-debug:3.4.0
+
+bundle exec cucumber

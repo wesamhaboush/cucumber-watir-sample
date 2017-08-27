@@ -29,10 +29,10 @@ GEM
     multi_test (0.1.2)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
-    page-object (2.2.2)
+    page-object (2.2)
       page_navigation (>= 0.10)
       selenium-webdriver (~> 3.0)
-      watir (~> 6.7)
+      watir (~> 6.0)
     page_navigation (0.10)
       data_magic (>= 0.22)
     require_all (1.4.0)
@@ -50,15 +50,17 @@ GEM
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
     rubyzip (1.2.1)
-    selenium-webdriver (3.5.1)
+    selenium-webdriver (3.4.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
-    watir (6.7.3)
-      selenium-webdriver (~> 3.4, >= 3.4.1)
+      websocket (~> 1.0)
+    watir (6.2.0)
+      selenium-webdriver (~> 3.0)
     webdrivers (3.2.0)
       nokogiri (~> 1.6)
       rubyzip (~> 1.0)
       selenium-webdriver (~> 3.0)
+    websocket (1.2.4)
     yml_reader (0.7)
 
 PLATFORMS
@@ -70,7 +72,8 @@ DEPENDENCIES
   page-object
   require_all
   rspec
-  watir
+  selenium-webdriver (= 3.4.0)
+  watir (= 6.2.0)
   webdrivers
 
 BUNDLED WITH

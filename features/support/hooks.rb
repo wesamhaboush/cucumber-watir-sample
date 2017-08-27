@@ -1,5 +1,12 @@
 Before do
-  @browser = Watir::Browser.new(:chrome)
+  test_mode = ENV.fetch('TEST_MODE') { 'local' }
+  if test_mode.eql? 'remote'
+    @browser = Watir::Browser.new :remote
+  elsif test_mode.eql? 'local'
+    @browser = Watir::Browser.new(:chrome)
+  else
+    raise "invalid test mode provided: #{test_mode}"
+  end
 end
 
 After do |scenario|
