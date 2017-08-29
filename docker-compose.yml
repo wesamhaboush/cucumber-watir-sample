@@ -7,15 +7,35 @@ services:
     selenium-hub:
         image: selenium/hub:3.4.0
         ports:
-            - "4444:4444"
+            - 4444:4444
+        environment:
+            - GRID_TIMEOUT=0
+            - GRID_NEW_SESSION_WAIT_TIMEOUT=-1
+            - GRID_BROWSER_TIMEOUT=10000
+            - GRID_TIMEOUT=30000
+            - GRID_CLEAN_UP_CYCLE=30000
+
     chrome-node:
         image: selenium/node-chrome-debug:3.4.0
-        links:
-            - selenium-hub:hub
+        environment:
+            - DBUS_SESSION_BUS_ADDRESS=/dev/null
+            - HUB_PORT_4444_TCP_ADDR=selenium-hub
+            - HUB_PORT_4444_TCP_PORT=4444
+            - SCREEN_WIDTH=1920
+            - SCREEN_HEIGHT=1080
+            - NODE_REGISTER_CYCLE=5000
+        ports:
+            - 5900
+        volumes:
+            - /dev/shm:/dev/shm
+
     firefox-node:
         image: selenium/node-firefox-debug:3.4.0
-        links:
-            - selenium-hub:hub
-
-
-
+        environment:
+            - HUB_PORT_4444_TCP_ADDR=selenium-hub
+            - HUB_PORT_4444_TCP_PORT=4444
+            - SCREEN_WIDTH=1920
+            - SCREEN_HEIGHT=1080
+            - NODE_REGISTER_CYCLE=5000
+        ports:
+            - 5900
