@@ -1,4 +1,5 @@
 version: "3.3"
+# docker-compose up -d --force-recreate --scale selenium-hub=1 --scale chrome-node=3 --scale firefox-node=3
 # docker run --rm --detach --publish 4444:4444 --name selenium-hub selenium/hub:3.4.0
 # docker run --rm --detach --publish-all -p 5900:5900 --link selenium-hub:hub --name chrome-node selenium/node-chrome-debug:3.4.0
 # docker run --rm --detach --publish-all -p 5901:5900 --link selenium-hub:hub --name firefox-node selenium/node-firefox-debug:3.4.0
@@ -28,6 +29,8 @@ services:
             - 5900
         volumes:
             - /dev/shm:/dev/shm
+        depends_on:
+            - selenium-hub
 
     firefox-node:
         image: selenium/node-firefox-debug:3.4.0
@@ -39,3 +42,5 @@ services:
             - NODE_REGISTER_CYCLE=5000
         ports:
             - 5900
+        depends_on:
+            - selenium-hub
